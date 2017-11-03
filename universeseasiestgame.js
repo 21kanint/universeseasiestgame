@@ -1,9 +1,12 @@
-fnvnfnvfjnf
-fvf mv fmv mf v fmv f
-vfvfvjfv fj vjf
-fjvjfjv fvf
- f f vfm fmv
- f vfj vjf  jfvv
- f vf vfn f  f
- vfkmvfvnkfnfnknvfkn
- fvjvnfjvjfvnjv
+//calling the canvas
+let canvas = document.getElementById("grid");
+let ctx = canvas.getContext("2d")
+
+rectx = rect(15, 15, 15, 15);
+recty = rect(15, 15, 15, 15);
+
+let player = {
+ isAlive: true,
+ x: rectx,
+ y: recty
+};
