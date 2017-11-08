@@ -1,43 +1,69 @@
 //calling the canvas
 let canvas = document.getElementById("grid");
 let ctx = canvas.getContext("2d")
+let kbd = {
+  u: false,
+};
+
+let enemies = {
+  doesReset: true
+};
 
 let player = {
  isAlive: true,
  x: 5,
  y: 5,
-};
-
-function draw() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.fillStyle = "#8CE8FF"
-  ctx.fillRect(player.x, player.y, 20, 20);
-  requestAnimationFrame(draw);
+ draw : function() {
+  ctx.fillStyle = "#8CE8FF";
+  ctx.fillRect(this.x, this.y, 20, 20);
+ }
 };
 
 
-
-
-document.addEventListener('keydown', function(event) {
+function init() {
+  document.addEventListener('keydown', function(e) {
 //left move    
-  if(event.keyCode == 37) {
+  if(e.keyCode === 37) {
         player.x -= 8;
+        e.preventDefault();
     }
   
   //right move
-    else if(event.keyCode == 39) {       
+    else if(e.keyCode === 39) {       
       player.x += 8;
-
+      e.preventDefault();
     }
   
   //up move
-    else if(event.keyCode == 38) {
+    else if(e.keyCode === 38) {
       player.y -= 8;
+      e.preventDefault();
     }
   
   //down move
-  else if(event.keyCode == 40) {
+  else if(e.keyCode === 40) {
     player.y += 8;
-  }});
+    e.preventDefault();
+  }
+});
 
-draw();
+  
+  update();
+}
+
+function update() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  
+  player.draw();
+  
+  
+  requestAnimationFrame(update);
+}
+
+  
+
+
+
+
+
+init();
