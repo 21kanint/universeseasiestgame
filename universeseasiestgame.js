@@ -120,3 +120,14 @@ function update() {
 }
 
 init();
+
+let levelOne = [
+    ["   xxxxxxxxxxxxxx    ",
+     "   x            x        ",
+     "xxxx            xxxx   ", 
+     "x###            ~~~x  ", 
+     "x###            ~~~x ", 
+     "xxxx            xxxx      ",
+     "   x            x   ",
+     "   xxxxxxxxxxxxxx               "]
+  ];
