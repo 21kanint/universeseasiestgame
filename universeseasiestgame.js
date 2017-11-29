@@ -1,9 +1,24 @@
-//calling the canvas
 let canvas = document.getElementById("grid");
 let ctx = canvas.getContext("2d")
 
-let playerspd = 1;
+//28 by 12 
+let levelOne = 
+    ["    xxxxxxxxxxxxxxxxxxxxxxx",
+     "    x                     x",
+     "    x                     x   ", 
+     "    x                     x   ", 
+     "xxxxx                     xxxxx", 
+     "x####                     ~~~~x", 
+     "x####                     ~~~~x", 
+     "xxxxx                     xxxxx", 
+     "    x                     x   ", 
+     "    x                     x",
+     "    x                     x",
+     "    xxxxxxxxxxxxxxxxxxxxxxx"];
 
+let playerspd = 2;
+const gridSize = 20;
+//kbd obj values
 let kbd = {
   u: false,
   d: false,
@@ -15,11 +30,12 @@ let enemies = {
   doesReset: true
 };
 
+//player obj
 let player = {
  isAlive: true,
- x: 5,
- y: 5,
-  move: function(direction) {
+ x: 25,
+ y: 110,
+  move: function(direction, map) {
     if(direction === "u") {
       player.y -= playerspd;
     }
@@ -34,15 +50,19 @@ let player = {
 
     else if(direction === "r") {
       player.x += playerspd
+      
+   
     }
   },
   
+  //draw function
   draw: function() {
   ctx.fillStyle = "#8CE8FF";
   ctx.fillRect(this.x, this.y, 20, 20);
  }
 };
 
+//initializes default values for keypresses
 function init() {
   document.addEventListener('keydown', function(e) {
 //left move    
@@ -100,6 +120,7 @@ function init() {
   update();
 }
 
+//updates  animation 
 function update() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   if(kbd.u) {
@@ -113,21 +134,33 @@ function update() {
   }
   if(kbd.r) {
     player.move("r");
-  }
+  }  
+
   
+for (let i = 0; i < levelOne.length; i++) {
+  for (let j = 0; j < levelOne[i].length; j++) {
+    let y = i * gridSize;
+    let x = j * gridSize;
+    
+    if (levelOne[i][j] === "#") {
+      ctx.fillStyle = "blue";
+    }
+    
+    else if (levelOne[i][j] === "x") {
+      ctx.fillStyle = "#de0dd5";      
+    }
+    
+    else if (levelOne[i][j] === " ") {
+      ctx.fillStyle = "transparent";
+    }
+    else if (levelOne[i][j] === "~") {
+      ctx.fillStyle = "green";
+    }
+    ctx.fillRect(x,y,gridSize,gridSize);
+  } 
+}
   player.draw();
   requestAnimationFrame(update);
 }
 
 init();
-
-let levelOne = [
-    ["   xxxxxxxxxxxxxx    ",
-     "   x            x        ",
-     "xxxx            xxxx   ", 
-     "x###            ~~~x  ", 
-     "x###            ~~~x ", 
-     "xxxx            xxxx      ",
-     "   x            x   ",
-     "   xxxxxxxxxxxxxx               "]
-  ];
