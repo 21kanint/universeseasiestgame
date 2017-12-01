@@ -16,7 +16,7 @@ let levelOne =
      "    x                     x",
      "    xxxxxxxxxxxxxxxxxxxxxxx"];
 
-let playerspd = 2;
+let playerspd = .2;
 const gridSize = 20;
 //kbd obj values
 let kbd = {
@@ -33,10 +33,13 @@ let enemies = {
 //player obj
 let player = {
  isAlive: true,
- x: 25,
- y: 110,
+ x: 2,
+ y: 5.5,
+ size: 20,
   move: function(direction, map) {
-    if(direction === "u") {
+    if(direction === "u" 
+       && map[this.y-playerspd|0][this.x|0] !== "x" 
+       && map[this.y-playerspd|0][this.x+s|0] !== "x") {
       player.y -= playerspd;
     }
 
@@ -57,8 +60,8 @@ let player = {
   
   //draw function
   draw: function() {
-  ctx.fillStyle = "#8CE8FF";
-  ctx.fillRect(this.x, this.y, 20, 20);
+    ctx.fillStyle = "#8CE8FF";
+    ctx.fillRect(this.x*gridSize, this.y*gridSize, this.size, this.size);
  }
 };
 
@@ -124,7 +127,7 @@ function init() {
 function update() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   if(kbd.u) {
-    player.move("u");
+    player.move("u", levelOne);
   } 
   if(kbd.d)  {
     player.move("d");
