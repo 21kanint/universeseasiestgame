@@ -37,6 +37,8 @@ let player = {
  y: 5.5,
  size: 20,
   move: function(direction, map) {
+    
+    const s = this.size / gridSize;
     if(direction === "u" 
        && map[this.y-playerspd|0][this.x|0] !== "x" 
        && map[this.y-playerspd|0][this.x+s|0] !== "x") {
