@@ -16,7 +16,7 @@ let levelOne =
      "    x                     x",
      "    xxxxxxxxxxxxxxxxxxxxxxx"];
 
-let playerspd = .2;
+let playerspd = .1;
 const gridSize = 20;
 //kbd obj values
 let kbd = {
