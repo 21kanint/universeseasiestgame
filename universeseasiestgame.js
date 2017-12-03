@@ -26,9 +26,7 @@ let kbd = {
   r: false
 };
 
-let enemies = {
-  doesReset: true
-};
+let enemy = [];
 
 //player obj
 let player = {
@@ -37,26 +35,27 @@ let player = {
  y: 5.5,
  size: 20,
   move: function(direction, map) {
-    
     const s = this.size / gridSize;
     if(direction === "u" 
        && map[this.y-playerspd|0][this.x|0] !== "x" 
        && map[this.y-playerspd|0][this.x+s|0] !== "x") {
-      player.y -= playerspd;
+       this.y -= playerspd;
+    }
+    else if(direction === "d"
+       && map[this.y+playerspd+s|0][this.x|0] !== "x" 
+       && map[this.y+playerspd+s|0][this.x+s|0] !== "x") {    
+       this.y += playerspd;
+    }
+    else if(direction === "l"
+      && map[this.y-playerspd|0][this.x|0] !== "x" 
+      && map[this.y+s|0][this.x-playerspd|0] !== "x") {
+      this.x -= playerspd
     }
 
-    else if(direction === "d") {
-      player.y += playerspd;
-    }
-
-    else if(direction === "l") {
-      player.x -= playerspd
-    }
-
-    else if(direction === "r") {
-      player.x += playerspd
-      
-   
+    else if(direction === "r"
+      && map[this.y|0][this.x+playerspd+s|0] !== "x" 
+      && map[this.y+s|0][this.x+playerspd+s|0] !== "x") {     
+      this.x += playerspd
     }
   },
   
@@ -132,13 +131,13 @@ function update() {
     player.move("u", levelOne);
   } 
   if(kbd.d)  {
-    player.move("d");
+    player.move("d", levelOne);
   } 
   if(kbd.l) {
-    player.move("l");
+    player.move("l", levelOne);
   }
   if(kbd.r) {
-    player.move("r");
+    player.move("r", levelOne);
   }  
 
   
