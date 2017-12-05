@@ -67,7 +67,7 @@ let player = {
        this.y += playerspd;
     }
     else if(direction === "l"
-      && map[this.y-playerspd|0][this.x|0] !== "x" 
+      && map[this.y|0][this.x-playerspd|0] !== "x" 
       && map[this.y+s|0][this.x-playerspd|0] !== "x") {
       this.x -= playerspd
     }
@@ -210,3 +210,4 @@ for (let i = 0; i < levelOne.length; i++) {
 }
 
 init();
+
