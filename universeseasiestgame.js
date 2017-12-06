@@ -104,7 +104,10 @@ let player = {
   //draw function
   draw: function() {
     ctx.fillStyle = "#ff0000";
+    ctx.strokeStyle = "#000000";
+    ctx.lineWidth = 3;
     ctx.fillRect(this.x*gridSize, this.y*gridSize, this.size, this.size);
+    ctx.strokeRect(this.x*gridSize, this.y*gridSize, this.size, this.size);
  }
 };
 
@@ -137,7 +140,10 @@ Enemy.prototype.move = function () {
 function drawEnemies() {
     for(let i = 0; i < enemies.length; i++){ 
       ctx.fillStyle = "#0000ff";
+      ctx.strokeStyle = "000000"
+      ctx.lineWidth = 3;
         ctx.fillRect(enemies[i].x*gridSize, enemies[i].y*gridSize, enemySize, enemySize);
+      ctx.strokeRect(enemies[i].x*gridSize, enemies[i].y*gridSize, enemySize, enemySize);
     }
  }
 
@@ -241,7 +247,7 @@ for (let i = 0; i < levelOne.length; i++) {
     }
     
     else if (levelOne[i][j] === " " && ((i + j) & 1)) {
-      ctx.fillStyle = "gray";
+      ctx.fillStyle = "#99ccff";
     }
     else if (levelOne[i][j] === " ") {
       ctx.fillStyle = "white";
@@ -271,4 +277,3 @@ for (let i = 0; i < levelOne.length; i++) {
 }
 
 init();
-
