@@ -70,6 +70,8 @@ let enemyData = [
 
 const enemies = [];
 
+let theEnd = false;
+
 //player obj
 let player = {
  isAlive: true,
@@ -135,6 +137,11 @@ Enemy.prototype.move = function () {
   }
 };
 
+function finishLevel(map){
+  if (map[player.y|0][player.x|0] == "~") {
+    theEnd = true;
+  }
+};
 
   //draw enemies function
 function drawEnemies() {
@@ -203,9 +210,9 @@ function init() {
 
   
   for (i = 0; i < enemyData.length; i++) {
-    enemies.push(new Enemy(enemyData[i].x, enemyData[i].y, "blue", 15,.14));
+    enemies.push(new Enemy(enemyData[i].x, enemyData[i].y, "blue", 15,.13));
   }
-  
+ 
   update();
 }
 
@@ -264,10 +271,13 @@ for (let i = 0; i < levelOne.length; i++) {
 }
   player.draw();
   drawEnemies();
+  finishLevel(levelOne);
   
   // check for collisions between player and enemies
   for (let i = 0; i < enemies.length; i++) {
-    enemies[i].move()
+    if (!theEnd) {
+      enemies[i].move()
+    }
     if (collides(player, enemies[i], gridSize)) {
        player.x = 2;
        player.y = 5.5;
