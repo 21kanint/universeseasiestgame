@@ -3,18 +3,18 @@ let ctx = canvas.getContext("2d")
 
 //28 by 12 
 let levelOne = 
-    ["    xxxxxxxxxxxxxxxxxxxxxxx",
-     "    x                     x",
-     "    x                     x   ", 
-     "    x                     x   ", 
+    ["@@@@xxxxxxxxxxxxxxxxxxxxxxx",
+     "@@@@x                     x",
+     "@@@@x                     x", 
+     "@@@@x                     x", 
      "xxxxx                     xxxxx", 
      "x####                     ~~~~x", 
      "x####                     ~~~~x", 
      "xxxxx                     xxxxx", 
-     "    x                     x   ", 
-     "    x                     x",
-     "    x                     x",
-     "    xxxxxxxxxxxxxxxxxxxxxxx"];
+     "@@@@x                     x", 
+     "@@@@x                     x",
+     "@@@@x                     x",
+     "@@@@xxxxxxxxxxxxxxxxxxxxxxx"];
 
 
 let playerspd = .1;
@@ -103,7 +103,7 @@ let player = {
   
   //draw function
   draw: function() {
-    ctx.fillStyle = "#8CE8FF";
+    ctx.fillStyle = "#ff0000";
     ctx.fillRect(this.x*gridSize, this.y*gridSize, this.size, this.size);
  }
 };
@@ -136,7 +136,7 @@ Enemy.prototype.move = function () {
   //draw enemies function
 function drawEnemies() {
     for(let i = 0; i < enemies.length; i++){ 
-      ctx.fillStyle = "#ff0000";
+      ctx.fillStyle = "#0000ff";
         ctx.fillRect(enemies[i].x*gridSize, enemies[i].y*gridSize, enemySize, enemySize);
     }
  }
@@ -197,7 +197,7 @@ function init() {
 
   
   for (i = 0; i < enemyData.length; i++) {
-    enemies.push(new Enemy(enemyData[i].x, enemyData[i].y, "#ff0000", 15,.15));
+    enemies.push(new Enemy(enemyData[i].x, enemyData[i].y, "blue", 15,.14));
   }
   
   update();
@@ -233,19 +233,26 @@ for (let i = 0; i < levelOne.length; i++) {
     let x = j * gridSize;
     
     if (levelOne[i][j] === "#") {
-      ctx.fillStyle = "blue";
+      ctx.fillStyle = "#99ff99";
     }
     
     else if (levelOne[i][j] === "x") {
-      ctx.fillStyle = "#de0dd5";      
+      ctx.fillStyle = "#000000";
     }
     
+    else if (levelOne[i][j] === " " && ((i + j) & 1)) {
+      ctx.fillStyle = "gray";
+    }
     else if (levelOne[i][j] === " ") {
-      ctx.fillStyle = "transparent";
+      ctx.fillStyle = "white";
     }
     else if (levelOne[i][j] === "~") {
-      ctx.fillStyle = "green";
+      ctx.fillStyle = "#99ff99";
     }
+        else {
+      ctx.fillStyle = "transparent";
+    }
+
     ctx.fillRect(x,y,gridSize,gridSize);
   } 
 }
